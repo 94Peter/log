@@ -73,21 +73,53 @@ type zeroLogImpl struct {
 func (impl *zeroLogImpl) Info(msg string) {
 	impl.Logger.Info().Msg(msg)
 }
+
+func (impl *zeroLogImpl) Infof(format string, a ...any) {
+	impl.Info(fmt.Sprintf(format, a...))
+}
+
 func (impl *zeroLogImpl) Debug(msg string) {
 	impl.Logger.Debug().Msg(msg)
 }
+
+func (impl *zeroLogImpl) Debugf(format string, a ...any) {
+	impl.Debug(fmt.Sprintf(format, a...))
+}
+
 func (impl *zeroLogImpl) Warn(msg string) {
 	impl.Logger.Warn().Msg(msg)
 }
-func (impl *zeroLogImpl) Error(msg string) {
-	impl.Logger.Error().Msg(msg)
+
+func (impl *zeroLogImpl) Warnf(format string, a ...any) {
+	impl.WarnPkg(fmt.Errorf(format, a...))
 }
 
 func (impl *zeroLogImpl) WarnPkg(e error) {
 	impl.Logger.Warn().Err(e).Msg("")
 }
+
+func (impl *zeroLogImpl) Error(msg string) {
+	impl.Logger.Error().Msg(msg)
+}
+
+func (impl *zeroLogImpl) Errorf(format string, a ...any) {
+	impl.ErrorPkg(fmt.Errorf(format, a...))
+}
+
 func (impl *zeroLogImpl) ErrorPkg(e error) {
 	impl.Logger.Error().Err(e).Msg("")
+}
+
+func (impl *zeroLogImpl) Fatal(msg string) {
+	impl.Logger.Fatal().Msg(msg)
+}
+
+func (impl *zeroLogImpl) Fatalf(format string, a ...any) {
+	impl.FatalPkg(fmt.Errorf(format, a...))
+}
+
+func (impl *zeroLogImpl) FatalPkg(e error) {
+	impl.Logger.Fatal().Err(e).Msg("")
 }
 
 func newZeroFluent(fluentd *fluentLog) io.Writer {

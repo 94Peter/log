@@ -23,11 +23,18 @@ const (
 
 type Logger interface {
 	Info(string)
+	Infof(format string, a ...any)
 	Debug(string)
+	Debugf(format string, a ...any)
 	Warn(string)
-	Error(string)
-	ErrorPkg(error)
+	Warnf(format string, a ...any)
 	WarnPkg(error)
+	Error(string)
+	Errorf(format string, a ...any)
+	ErrorPkg(error)
+	Fatal(string)
+	Fatalf(format string, a ...any)
+	FatalPkg(error)
 }
 
 type ctxType string
