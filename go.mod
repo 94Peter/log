@@ -1,4 +1,4 @@
-module github.com/arwoosa/log
+module github.com/94peter/log
 
 go 1.19
 
