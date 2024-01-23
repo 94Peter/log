@@ -1,6 +1,9 @@
 package log
 
 import (
+	"os"
+	"strings"
+
 	"github.com/fluent/fluent-logger-golang/fluent"
 	"github.com/pkg/errors"
 )
@@ -31,4 +34,8 @@ func (rl *fluentLog) new() (*fluent.Fluent, error) {
 	}
 
 	return fluent.New(*rl.config)
+}
+
+func EnvHasFluentd() bool {
+	return strings.Contains(os.Getenv(_ENV_NAME_TARGET), "fluentd")
 }
