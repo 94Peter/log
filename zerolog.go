@@ -62,7 +62,7 @@ func (lc *LoggerConf) NewLogger(service, pid string) (Logger, error) {
 	zerolog.SetGlobalLevel(level)
 
 	logger := zerolog.New(multi).With().Stack().Timestamp().
-		Str("service", service).Str("pid", pid).Logger()
+		Caller().Str("service", service).Str("pid", pid).Logger()
 	return &zeroLogImpl{Logger: logger}, nil
 }
 
