@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"os"
 	"strings"
 	"time"
@@ -62,12 +63,16 @@ func (lc *LoggerConf) NewLogger(service, pid string) (Logger, error) {
 	zerolog.SetGlobalLevel(level)
 
 	logger := zerolog.New(multi).With().Stack().Timestamp().
-		Caller().Str("service", service).Str("pid", pid).Logger()
+		Str("service", service).Str("pid", pid).Logger()
 	return &zeroLogImpl{Logger: logger}, nil
 }
 
 type zeroLogImpl struct {
 	zerolog.Logger
+}
+
+func (impl *zeroLogImpl) GetLogging() *log.Logger {
+	return log.New(impl.Logger, "", 0)
 }
 
 func (impl *zeroLogImpl) Info(msg string) {

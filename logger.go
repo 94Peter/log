@@ -2,6 +2,7 @@ package log
 
 import (
 	"context"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -35,6 +36,7 @@ type Logger interface {
 	Fatal(string)
 	Fatalf(format string, a ...any)
 	FatalPkg(error)
+	GetLogging() *log.Logger
 }
 
 type ctxType string
