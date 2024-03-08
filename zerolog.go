@@ -31,7 +31,7 @@ func (lc *LoggerConf) NewLogger(service, pid string) (Logger, error) {
 	if targetStr == "" {
 		targetStr = _ENV_VALUE_TARGET_OS
 	}
-	targetAry := strings.Split(targetStr, "|")
+	targetAry := strings.Split(targetStr, "+")
 	var writers []io.Writer
 	for _, s := range targetAry {
 		switch s {
